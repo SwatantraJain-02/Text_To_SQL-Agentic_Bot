@@ -3,7 +3,7 @@ import logging
 import inspect
 from typing import Optional
 from logging.handlers import RotatingFileHandler
-import config
+from . import config
 
 # Configuration via environment variables
 LOG_DIR = config.LOG_DIR
