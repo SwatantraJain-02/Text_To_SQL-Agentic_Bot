@@ -1,7 +1,11 @@
 langchain_community
 langchain_core
 langchain_groq
+langchain-huggingface
+langchain-chroma
 langgraph
+langsmith
+chromadb
 
 # Backend Dependencies
 fastapi
@@ -10,3 +14,10 @@ Requests
 
 # Python Dependencies
 python-dotenv
+
+# Embedding Dependencies
+tf-keras
+sentence_transformers
+hf_xet
+pypdf
+pillow
