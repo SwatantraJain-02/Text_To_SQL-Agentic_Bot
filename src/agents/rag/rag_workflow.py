@@ -12,7 +12,7 @@ from langgraph.prebuilt import ToolNode, tools_condition
 from src.utils import config
 from src.utils.llm_adapter import LLMAdapter
 from src.utils.logger import get_logger
-from src.data.prompts.rag_prompts import system_prompt, user_prompt
+from src.data.prompts.rag_prompt import system_prompt, user_prompt
 from src.agents.rag.rag_state import State
 from src.agents.rag.rag_tools import create_database_retrieval_tool
 
