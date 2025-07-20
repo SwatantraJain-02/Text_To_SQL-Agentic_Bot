@@ -1,8 +1,9 @@
-langchain_community
+langchain-community
 langchain_core
 langchain_groq
 langchain-huggingface
 langchain-chroma
+langchainhub
 langgraph
 langsmith
 chromadb
@@ -14,6 +15,7 @@ Requests
 
 # Python Dependencies
 python-dotenv
+pandas
 
 # Embedding Dependencies
 tf-keras
