@@ -17,7 +17,9 @@ Requests
 python-dotenv
 pandas
 
-# Embedding Dependencies
+# RAG dependencies
+# pysqlite3
+pysqlite-binary
 tf-keras
 sentence_transformers
 hf_xet
