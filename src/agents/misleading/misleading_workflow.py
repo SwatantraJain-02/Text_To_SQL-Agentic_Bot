@@ -42,7 +42,10 @@ class MisleadingWorkflow:
             response = await self.llm_client.client.ainvoke(convo)
 
             model_output = response.content
-            logger.info(f"Misleading agent output: {model_output}")
+            try:
+                logger.info(f"Misleading agent output: {model_output}")
+            except UnicodeEncodeError:
+                logger.info(f"Misleading agent output: {model_output.encode('ascii', 'ignore').decode('ascii')}")
 
             return {"model_output": model_output, "messages": [response]}
 
