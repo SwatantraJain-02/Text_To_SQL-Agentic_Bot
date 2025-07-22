@@ -75,7 +75,8 @@ streamlit run frontend/app.py
 - Chat through the main interface; toggle “Show AI Thinking Process” to inspect internal reasoning.
 
 ### 2. Jupyter Notebooks
-
+- The sample documents for RAG and a sample DB has already been created.
+- If you wish to create something of your own then you must delete them re-create using the below mentioned Jupyter Notebook
 - Data ingestion for RAG: `src/Notebooks/RAG_ingestion.ipynb`  
 - Text-to-SQL experimentation: `src/Notebooks/Text_To_SQL.ipynb`  
 
