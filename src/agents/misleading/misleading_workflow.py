@@ -7,11 +7,11 @@ from langgraph.graph import StateGraph, START, END
 from src.utils import config
 from src.utils.llm_adapter import LLMAdapter
 from src.utils.logger import get_logger
-from src.data.prompts.misleading_agent_prompts import misleading_agent_system_prompt, misleading_agent_user_prompt
-from src.agents.misleading_agent.misleading_state import State
-from src.database.sqlite import insert_token_tracking
+from src.data.prompts.misleading_prompt import system_prompt, user_prompt
+from src.agents.misleading.misleading_state import State
 
 logger = get_logger(__name__)
+
 
 class MisleadingWorkflow:
     """
@@ -26,44 +26,26 @@ class MisleadingWorkflow:
             logger.info("Starting misleading agent processing")
             user_query = state["user_query"]
             messages = state.get("messages", [])
-            
+
             logger.debug(f"Processing user query: {user_query}")
-            
+
             # Prepare conversation for LLM
             convo = [
-                ("system", misleading_agent_system_prompt),
-                ("user", misleading_agent_user_prompt.format(user_query=user_query)),
+                ("system", system_prompt),
+                ("user", user_prompt.format(user_query=user_query)),
             ]
-            
+
             # Add existing messages if available
             if messages:
                 convo.extend(messages)
-            
+
             response = await self.llm_client.client.ainvoke(convo)
-            
-            # Token tracking
-            if hasattr(response, 'usage_metadata') and response.usage_metadata:
-                input_token = response.usage_metadata.get('input_tokens', 0)
-                output_token = response.usage_metadata.get('output_tokens', 0)
-                total_tokens = response.usage_metadata.get('total_tokens', 0)
-                
-                insert_token_tracking(
-                    user_query, 
-                    "misleading_agent", 
-                    "misleading_agent_node", 
-                    input_token, 
-                    output_token, 
-                    total_tokens
-                )
-            
+
             model_output = response.content
             logger.info(f"Misleading agent output: {model_output}")
-            
-            return {
-                "model_output": model_output,
-                "messages": [response]
-            }
-            
+
+            return {"model_output": model_output, "messages": [response]}
+
         except Exception as exc:
             logger.exception("Error in misleading agent node")
             raise RuntimeError(f"Misleading agent error: {exc}") from exc
@@ -73,12 +55,14 @@ class MisleadingWorkflow:
         graph.add_node("misleading_agent", self.misleading_agent_node)
         graph.add_edge(START, "misleading_agent")
         graph.add_edge("misleading_agent", END)
-        
+
         compiled = graph.compile()
         logger.info("Misleading StateGraph compiled successfully")
         return compiled
 
+
 if __name__ == "__main__":
+
     async def main():
         try:
             wf = MisleadingWorkflow()
