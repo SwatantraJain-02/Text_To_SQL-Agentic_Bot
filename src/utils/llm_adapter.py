@@ -46,16 +46,13 @@ class LLMAdapter:
         """
         full_messages: List[BaseMessage] = []
 
-        if system_prompt:
-            self.logger.debug(f"Adding system prompt: {system_prompt}")
-            full_messages.append(SystemMessage(content=system_prompt))
-
         if messages:
             self.logger.debug(f"Extending with {len(messages)} prior message(s)")
             full_messages.extend(messages)
-
-        self.logger.debug(f"Adding user prompt: {user_prompt}")
-        full_messages.append(HumanMessage(content=user_prompt))
+        else:
+            if system_prompt:
+                full_messages.append(SystemMessage(system_prompt))
+            full_messages.append(HumanMessage(user_prompt))
 
         try:
             self.logger.info(
