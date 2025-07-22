@@ -61,7 +61,7 @@ def _handle_chat_input(current_thread: dict, show_thinking: bool):
         if current_thread['workflow'] is None:
             with st.spinner("Initializing workflow..."):
                 try:
-                    from utils.workflow_handler import initialize_workflow_sync
+                    from frontend.utils.workflow_handler import initialize_workflow_sync
                     workflow, graph = initialize_workflow_sync(st.session_state.current_thread_id)
                     current_thread['workflow'] = workflow
                     current_thread['graph'] = graph
