@@ -24,3 +24,4 @@ hf_xet
 pypdf
 pillow
 chromadb
+pysqlite3-binary
