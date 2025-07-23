@@ -1,3 +1,4 @@
+pysqlite3-binary
 langchain-community
 langchain_core
 langchain_groq
@@ -24,4 +25,4 @@ hf_xet
 pypdf
 pillow
 chromadb
-pysqlite3-binary
+
