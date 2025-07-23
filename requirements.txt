@@ -18,8 +18,6 @@ python-dotenv
 pandas
 
 # RAG dependencies
-# pysqlite3
-pysqlite-binary
 tf-keras
 sentence_transformers
 hf_xet
